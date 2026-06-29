@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PortfolioGrid from "../components/react/PortfolioGrid";
+import { portfolioItems } from "../data/portfolio";
+---
+
+<BaseLayout title="Portfolio | Caroline Thomas">
+  <section class="py-16 md:py-24">
+    <div class="container-premium">
+      <div class="mx-auto mb-16 max-w-xl text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl">Projects</h1>
+        <p class="mt-5 text-base leading-7 text-slate-300">
+          Select work showcasing clinical learning, patient education, and service-centered nursing preparation.
+        </p>
+      </div>
+      <PortfolioGrid items={portfolioItems} client:load />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import { clinicalExperiences } from "../data/clinical";
+---
+
+<div class="relative space-y-6 before:absolute before:left-5 before:top-4 before:h-[calc(100%-2rem)] before:w-px before:bg-teal/30 md:before:left-1/2">
+  {clinicalExperiences.map((item, index) => (
+    <article class={`timeline-item reveal relative grid gap-4 md:grid-cols-2 ${index % 2 ? "md:[&>*:first-child]:col-start-2" : ""}`}>
+      <div class="glass rounded-[2rem] p-6">
+        <div class="flex items-start gap-4">
+          <span class="mt-1 grid size-10 shrink-0 place-items-center rounded-full bg-teal text-sm font-bold text-white">{index + 1}</span>
+          <div>
+            <p class="eyebrow">{item.specialty}</p>
+            <h3 class="mt-2 font-display text-2xl font-semibold text-navy">{item.site}</h3>
+            <p class="mt-2 text-sm font-semibold text-gold">Hours: {item.hours}</p>
+          </div>
+        </div>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {item.skills.map((skill) => (
+            <span class="rounded-full bg-mist px-3 py-1.5 text-xs font-bold text-navy">{skill}</span>
+          ))}
+        </div>
+        <p class="mt-5 leading-7 text-ink/70">{item.outcome}</p>
+      </div>
+    </article>
+  ))}
+</div>

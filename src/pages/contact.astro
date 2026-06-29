@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import ContactCards from "../components/react/ContactCards";
+---
+
+<BaseLayout title="Contact | Caroline Thomas">
+  <PageHeader eyebrow="Contact" title="Contact Caroline." copy="For nurse residency, mentorship, and professional opportunities." />
+  <section class="section-pad pt-0">
+    <div class="container-premium max-w-3xl space-y-8">
+      <ContactCards client:load />
+      <aside class="glass rounded-[2rem] p-7 text-center">
+        <p class="eyebrow">Professional Contact</p>
+        <h2 class="mt-4 text-3xl font-bold tracking-tight text-navy">Thanks for reviewing.</h2>
+        <p class="mx-auto mt-5 max-w-2xl leading-7 text-ink/68">Best fit: emergency nursing, new graduate transition, service-minded teams, and growth-oriented clinical environments.</p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

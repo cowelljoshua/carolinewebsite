@@ -1,0 +1,10 @@
+---
+const { href, label, variant = "primary", download = false } = Astro.props;
+const classes = variant === "secondary"
+  ? "border border-white/70 bg-white text-slate-950 shadow-[0_16px_40px_rgba(255,255,255,.12)] hover:border-teal hover:text-navy"
+  : "bg-navy text-white shadow-glow hover:-translate-y-0.5 hover:bg-[#0d283d]";
+---
+
+<a href={href} download={download} class={`inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-bold transition duration-300 ${classes}`}>
+  {label}
+</a>

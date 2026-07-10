@@ -23,13 +23,13 @@ const highlights = [
           BSN candidate focused on emergency nursing, calm patient care, and strong clinical judgment.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <ButtonLink href="/resume" label="Resume" />
-          <ButtonLink href="/portfolio" label="View Portfolio" variant="secondary" />
-          <ButtonLink href="/contact" label="Contact" variant="secondary" />
+          <ButtonLink href={`${import.meta.env.BASE_URL}resume`} label="Resume" />
+          <ButtonLink href={`${import.meta.env.BASE_URL}portfolio`} label="View Portfolio" variant="secondary" />
+          <ButtonLink href={`${import.meta.env.BASE_URL}contact`} label="Contact" variant="secondary" />
         </div>
       </div>
       <figure class="hero-float reveal group relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/14 bg-white/[0.06] shadow-premium backdrop-blur-2xl">
-        <img src="/assets/caroline-kenya-portrait.webp" alt="Caroline Thomas during a clinical trip to Kenya" class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100" loading="eager" />
+        <img src={`${import.meta.env.BASE_URL}assets/caroline-kenya-portrait.webp`} alt="Caroline Thomas during a clinical trip to Kenya" class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100" loading="eager" />
         <figcaption class="pointer-events-none absolute inset-x-5 bottom-5 translate-y-3 rounded-2xl border border-white/14 bg-[#06111d]/72 px-4 py-3 text-center text-sm font-bold text-white opacity-0 shadow-premium backdrop-blur-xl transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
           Clinical trip to Kenya, Africa
         </figcaption>
@@ -62,7 +62,7 @@ const highlights = [
         <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy">Simple, focused, ready to discuss fit.</h2>
         <p class="mt-3 max-w-2xl leading-7 text-ink/66">Resume, clinical background, and selected projects are available in the top navigation. No patient-identifying information is included.</p>
       </div>
-      <ButtonLink href="/contact" label="Contact Caroline" />
+      <ButtonLink href={`${import.meta.env.BASE_URL}contact`} label="Contact Caroline" />
     </div>
   </section>
 </BaseLayout>

@@ -1,12 +1,13 @@
 import { Activity, BriefcaseMedical, FileText, Home, Mail, Stethoscope } from "lucide-react";
 import GlassSurface from "./GlassSurface";
 
+const base = import.meta.env.BASE_URL;
 const navItems = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/resume", label: "Resume", icon: FileText },
-  { href: "/clinical-experience", label: "Clinical", icon: Stethoscope },
-  { href: "/portfolio", label: "Portfolio", icon: BriefcaseMedical },
-  { href: "/contact", label: "Contact", icon: Mail }
+  { href: base, label: "Home", icon: Home },
+  { href: `${base}resume`, label: "Resume", icon: FileText },
+  { href: `${base}clinical-experience`, label: "Clinical", icon: Stethoscope },
+  { href: `${base}portfolio`, label: "Portfolio", icon: BriefcaseMedical },
+  { href: `${base}contact`, label: "Contact", icon: Mail }
 ];
 
 export default function Navbar({ currentPath }: { currentPath: string }) {
@@ -15,7 +16,7 @@ export default function Navbar({ currentPath }: { currentPath: string }) {
   return (
     <header className="sticky top-4 z-50 mx-auto w-full px-4">
       <nav className="container-premium flex items-center justify-between gap-4" aria-label="Primary navigation">
-        <a href="/" className="group flex items-center gap-3 rounded-[1.35rem] border border-white/14 bg-white/[0.06] px-3 py-2 font-bold text-white shadow-premium backdrop-blur-2xl" aria-label="Caroline Thomas home">
+        <a href={base} className="group flex items-center gap-3 rounded-[1.35rem] border border-white/14 bg-white/[0.06] px-3 py-2 font-bold text-white shadow-premium backdrop-blur-2xl" aria-label="Caroline Thomas home">
           <GlassSurface className="size-11 rounded-2xl" contentClassName="p-0">
             <Activity size={20} className="text-teal" />
           </GlassSurface>

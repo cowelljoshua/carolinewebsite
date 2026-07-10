@@ -1,10 +1,11 @@
 ---
+const base = import.meta.env.BASE_URL;
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/resume", label: "Resume" },
-  { href: "/clinical-experience", label: "Clinical" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/contact", label: "Contact" }
+  { href: base, label: "Home" },
+  { href: `${base}resume`, label: "Resume" },
+  { href: `${base}clinical-experience`, label: "Clinical" },
+  { href: `${base}portfolio`, label: "Portfolio" },
+  { href: `${base}contact`, label: "Contact" }
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -12,7 +13,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 <header class="sticky top-0 z-50 border-b border-white/50 bg-white/54 backdrop-blur-2xl">
   <nav class="container-premium flex min-h-20 items-center justify-between gap-6" aria-label="Primary navigation">
-    <a href="/" class="group flex items-center gap-3 font-bold text-navy" aria-label="Caroline Thomas home">
+    <a href={base} class="group flex items-center gap-3 font-bold text-navy" aria-label="Caroline Thomas home">
       <span class="grid size-10 place-items-center rounded-2xl bg-navy text-white shadow-glow">CT</span>
       <span class="hidden leading-tight sm:block">
         Caroline Thomas

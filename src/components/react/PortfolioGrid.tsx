@@ -25,7 +25,7 @@ export default function PortfolioGrid({ items }: { items: Item[] }) {
         >
           <div className="h-48 overflow-hidden bg-white/5">
             <img
-              src={item.image}
+              src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, "")}`}
               alt=""
               loading="lazy"
               className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-100"

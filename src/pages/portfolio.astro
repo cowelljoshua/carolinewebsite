@@ -1,19 +1,109 @@
----
+﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PortfolioGrid from "../components/react/PortfolioGrid";
 import { portfolioItems } from "../data/portfolio";
+
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path;
 ---
 
-<BaseLayout title="Portfolio | Caroline Thomas">
-  <section class="py-16 md:py-24">
-    <div class="container-premium">
-      <div class="mx-auto mb-16 max-w-xl text-center">
-        <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl">Projects</h1>
-        <p class="mt-5 text-base leading-7 text-slate-300">
-          Select work showcasing clinical learning, patient education, and service-centered nursing preparation.
-        </p>
+<BaseLayout
+  title="Selected Work | Caroline Thomas"
+  description="Selected clinical learning, patient education, and nursing preparation projects by Caroline Thomas."
+>
+  <section class="page-hero page-hero-work">
+    <div class="shell">
+      <p class="eyebrow" data-reveal><span>Work index</span> 2025—2026</p>
+      <div class="page-title-grid">
+        <h1 data-reveal>Selected<br /><em>work.</em></h1>
+        <div class="page-intro" data-reveal>
+          <p>Clinical learning translated into practical references, patient education, and structured reasoning.</p>
+          <p class="privacy-line"><span aria-hidden="true">●</span> All patient-facing work is de-identified.</p>
+        </div>
       </div>
-      <PortfolioGrid items={portfolioItems} client:load />
     </div>
   </section>
+
+  <section class="project-index section">
+    <div class="shell">
+      <div class="project-index-labels" aria-hidden="true">
+        <span>Project</span><span>Discipline</span><span>Preview</span>
+      </div>
+
+      <div class="project-list">
+        {portfolioItems.map((project, index) => (
+          <article id={project.slug} class="work-item" data-reveal>
+            <div class="work-item-heading">
+              <span class="work-number">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p>{project.category}</p>
+                <h2>{project.title}</h2>
+              </div>
+            </div>
+
+            <button
+              class="work-image-button"
+              type="button"
+              data-preview-src={asset(project.previewImages[0])}
+              data-preview-alt={"Preview of " + project.title}
+              data-preview-title={project.title}
+              aria-label={"Enlarge preview of " + project.title}
+            >
+              <img
+                src={asset(project.previewImages[0])}
+                alt={"Preview of " + project.title}
+                loading="lazy"
+              />
+              <span>Open preview ↗</span>
+            </button>
+
+            <div class="work-item-copy">
+              <p>{project.purpose}</p>
+              <strong>{project.outcome}</strong>
+              <div class="project-competencies">
+                {project.competencies.map((item) => <span>{item}</span>)}
+              </div>
+              {project.privacyNote && <small>{project.privacyNote}</small>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="work-cta">
+    <div class="shell work-cta-inner" data-reveal>
+      <p>Want the concise version?</p>
+      <h2>Experience, education,<br />and preparation in one page.</h2>
+      <a class="button button-primary" href={base + "resume"}>View résumé <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <dialog class="preview-dialog" data-preview-dialog>
+    <button type="button" class="preview-close" data-preview-close aria-label="Close preview">×</button>
+    <figure>
+      <img data-preview-image alt="" />
+      <figcaption data-preview-caption></figcaption>
+    </figure>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>("[data-preview-dialog]");
+    const dialogImage = dialog?.querySelector<HTMLImageElement>("[data-preview-image]");
+    const dialogCaption = dialog?.querySelector<HTMLElement>("[data-preview-caption]");
+
+    document.querySelectorAll<HTMLButtonElement>("[data-preview-src]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!dialog || !dialogImage || !dialogCaption) return;
+        dialogImage.src = button.dataset.previewSrc || "";
+        dialogImage.alt = button.dataset.previewAlt || "";
+        dialogCaption.textContent = button.dataset.previewTitle || "";
+        dialog.showModal();
+      });
+    });
+
+    dialog?.querySelector<HTMLButtonElement>("[data-preview-close]")?.addEventListener("click", () => dialog.close());
+    dialog?.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  </script>
 </BaseLayout>

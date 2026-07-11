@@ -1,10 +1,10 @@
-import { defineConfig } from "astro/config";
-import react from "@astrojs/react";
+﻿import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
+  site: "https://cowelljoshua.github.io",
   base: process.env.BASE_PATH || "/",
-  integrations: [react(), tailwind({ applyBaseStyles: false })],
+  integrations: [tailwind({ applyBaseStyles: false })],
   prefetch: true,
   vite: {
     build: {

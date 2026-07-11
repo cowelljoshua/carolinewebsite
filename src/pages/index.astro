@@ -1,68 +1,207 @@
----
+﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ButtonLink from "../components/ButtonLink.astro";
-import StatCounters from "../components/react/StatCounters";
-import HeroTitle from "../components/react/HeroTitle";
-import { stats } from "../data/stats";
+import { profile, credentials, certifications } from "../data/profile";
+import { clinicalExperiences, globalHealth } from "../data/clinical";
+import { featuredProjects } from "../data/portfolio";
 
-const highlights = [
-  ["ED Focus", "New graduate emergency nursing."],
-  ["BSN 2026", "Liberty University, psychology minor."],
-  ["Global Health", "Kenya clinical exposure and service."],
-  ["Next Goal", "Critical care growth and future CRNA path."]
-];
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path;
 ---
 
-<BaseLayout title="Caroline Thomas | Senior Nursing Student Portfolio">
-  <section class="relative overflow-hidden py-16 md:py-24">
-    <div class="container-premium grid items-center gap-8 lg:grid-cols-[1.05fr_.95fr]">
-      <div class="reveal liquid-glass rounded-[2rem] p-7 md:p-10">
-        <p class="eyebrow">Emergency Nursing Portfolio</p>
-        <HeroTitle client:load />
-        <p class="mt-6 max-w-xl text-lg leading-8 text-ink/70">
-          BSN candidate focused on emergency nursing, calm patient care, and strong clinical judgment.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <ButtonLink href={`${import.meta.env.BASE_URL}resume`} label="Resume" />
-          <ButtonLink href={`${import.meta.env.BASE_URL}portfolio`} label="View Portfolio" variant="secondary" />
-          <ButtonLink href={`${import.meta.env.BASE_URL}contact`} label="Contact" variant="secondary" />
+<BaseLayout>
+  <section id="overview" class="hero-section">
+    <div class="hero-grid shell">
+      <div class="hero-copy" data-reveal>
+        <div class="status-line">
+          <span class="status-dot"></span>
+          New-graduate RN candidate · {profile.graduation}
+        </div>
+        <h1>
+          <span>Caroline</span>
+          <span class="type-outline">Thomas</span>
+        </h1>
+        <div class="hero-statement">
+          <p>{profile.positioning}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href={base + profile.resume}>
+              View résumé <span aria-hidden="true">↗</span>
+            </a>
+            <a class="button button-quiet" href={base + "portfolio"}>
+              Selected work <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
-      <figure class="hero-float reveal group relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/14 bg-white/[0.06] shadow-premium backdrop-blur-2xl">
-        <img src={`${import.meta.env.BASE_URL}assets/caroline-kenya-portrait.webp`} alt="Caroline Thomas during a clinical trip to Kenya" class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100" loading="eager" />
-        <figcaption class="pointer-events-none absolute inset-x-5 bottom-5 translate-y-3 rounded-2xl border border-white/14 bg-[#06111d]/72 px-4 py-3 text-center text-sm font-bold text-white opacity-0 shadow-premium backdrop-blur-xl transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
-          Clinical trip to Kenya, Africa
-        </figcaption>
-      </figure>
-    </div>
-  </section>
 
-  <section class="pb-12">
-    <div class="container-premium">
-      <StatCounters stats={stats} client:load />
+      <div class="hero-visual" data-hero-visual data-reveal>
+        <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+        <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+        <div class="portrait-frame">
+          <img
+            src={asset("assets/caroline-kenya-portrait.webp")}
+            alt="Caroline Thomas during a clinical service experience in Kenya"
+            loading="eager"
+          />
+          <div class="portrait-wash" aria-hidden="true"></div>
+        </div>
+        <div class="visual-tag visual-tag-top">
+          <span>01</span>
+          Clinical portfolio
+        </div>
+        <div class="visual-tag visual-tag-bottom">
+          <span>VA</span>
+          Based in Virginia
+        </div>
+        <div class="hero-monogram" aria-hidden="true">CT</div>
+      </div>
     </div>
-  </section>
 
-  <section class="section-pad pt-8">
-    <div class="container-premium grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-      {highlights.map(([title, copy]) => (
-        <article class="reveal glass rounded-[1.5rem] p-5">
-          <div class="mb-4 h-1 w-10 rounded-full bg-gold"></div>
-          <h3 class="text-xl font-bold text-navy">{title}</h3>
-          <p class="mt-2 text-sm leading-6 text-ink/65">{copy}</p>
-        </article>
+    <div class="credential-rail shell" data-reveal aria-label="Credentials at a glance">
+      {credentials.map((credential, index) => (
+        <div class="credential">
+          <span class="credential-index">0{index + 1}</span>
+          <strong>{credential.value}</strong>
+          <span>{credential.label}</span>
+        </div>
       ))}
     </div>
   </section>
 
-  <section class="pb-16 md:pb-24">
-    <div class="container-premium liquid-glass grid gap-6 rounded-[2rem] p-7 md:grid-cols-[1fr_auto] md:items-center md:p-9">
-      <div>
-        <p class="eyebrow">Recruiter Snapshot</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy">Simple, focused, ready to discuss fit.</h2>
-        <p class="mt-3 max-w-2xl leading-7 text-ink/66">Resume, clinical background, and selected projects are available in the top navigation. No patient-identifying information is included.</p>
+  <section id="experience" class="section clinical-section">
+    <div class="shell">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow"><span>02</span> Clinical experience</p>
+          <h2>Learning across<br /><em>the continuum.</em></h2>
+        </div>
+        <p>Supervised rotations spanning acute, specialty, maternal-child, and community care.</p>
       </div>
-      <ButtonLink href={`${import.meta.env.BASE_URL}contact`} label="Contact Caroline" />
+
+      <div class="clinical-grid">
+        {clinicalExperiences.map((experience, index) => (
+          <article class="clinical-card" data-reveal>
+            <div class="clinical-number">0{index + 1}</div>
+            <div class="clinical-copy">
+              <p class="clinical-site">{experience.site}</p>
+              <h3>{experience.specialty}</h3>
+              <p>{experience.skills.slice(0, 3).join(" · ")}</p>
+            </div>
+            <span class="clinical-status">In progress</span>
+          </article>
+        ))}
+      </div>
+
+      <div class="certification-strip" data-reveal>
+        <span class="certification-label">Current preparation</span>
+        <div class="certification-list">
+          {certifications.map((certification) => <span>{certification}</span>)}
+        </div>
+      </div>
     </div>
   </section>
+
+  <section id="work" class="section work-section">
+    <div class="shell">
+      <div class="section-heading section-heading-light" data-reveal>
+        <div>
+          <p class="eyebrow"><span>03</span> Selected work</p>
+          <h2>Evidence,<br /><em>made visible.</em></h2>
+        </div>
+        <div class="section-side">
+          <p>Coursework shaped into clear tools for clinical learning and patient education.</p>
+          <a href={base + "portfolio"}>Explore all projects <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="featured-work">
+        {featuredProjects.map((project, index) => (
+          <article class="featured-project" data-reveal>
+            <div class="project-image-wrap">
+              <img
+                src={asset(project.previewImages[0])}
+                alt={"Preview of " + project.title}
+                loading="lazy"
+              />
+              <span class="project-sequence">0{index + 1} / 03</span>
+            </div>
+            <div class="project-copy">
+              <p class="project-category">{project.category}</p>
+              <h3>{project.title}</h3>
+              <p>{project.purpose}</p>
+              <div class="project-competencies">
+                {project.competencies.map((item) => <span>{item}</span>)}
+              </div>
+              <a href={base + "portfolio#" + project.slug}>View project <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section service-section">
+    <div class="shell service-grid">
+      <div class="service-image" data-reveal>
+        <img
+          src={asset("assets/caroline-kenya-portrait.webp")}
+          alt="Caroline Thomas in Kenya"
+          loading="lazy"
+        />
+        <div class="service-coordinate" aria-hidden="true">1°17′S · 36°49′E</div>
+      </div>
+      <div class="service-copy" data-reveal>
+        <p class="eyebrow"><span>04</span> Service & adaptability</p>
+        <h2>Care starts<br />with context.</h2>
+        <p>
+          Clinical exposure at {globalHealth.location} reinforced the value of listening,
+          cultural humility, and adapting communication to the person and setting.
+        </p>
+        <div class="service-facts">
+          <div><strong>Kenya</strong><span>Triage · OR · Pediatrics</span></div>
+          <div><strong>5+ years</strong><span>Fast-paced hospitality experience</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="shell contact-panel" data-reveal>
+      <div class="contact-kicker">
+        <span class="status-dot"></span>
+        Available for 2026 new-grad conversations
+      </div>
+      <h2>Let’s start with<br /><em>an introduction.</em></h2>
+      <div class="contact-actions">
+        <a class="button button-white" href={"mailto:" + profile.email}>
+          {profile.email} <span aria-hidden="true">↗</span>
+        </a>
+        <a class="contact-text-link" href={profile.linkedin} target="_blank" rel="noreferrer">
+          LinkedIn <span aria-hidden="true">↗</span>
+        </a>
+        <a class="contact-text-link" href={base + profile.resume}>
+          Résumé <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+      <span class="contact-monogram" aria-hidden="true">CT</span>
+    </div>
+  </section>
+
+  <script>
+    const hero = document.querySelector<HTMLElement>("[data-hero-visual]");
+    const reduceHeroMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (hero && !reduceHeroMotion && window.matchMedia("(pointer: fine)").matches) {
+      hero.addEventListener("pointermove", (event) => {
+        const bounds = hero.getBoundingClientRect();
+        const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 12;
+        const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 12;
+        hero.style.setProperty("--hero-x", x + "px");
+        hero.style.setProperty("--hero-y", y + "px");
+      });
+      hero.addEventListener("pointerleave", () => {
+        hero.style.setProperty("--hero-x", "0px");
+        hero.style.setProperty("--hero-y", "0px");
+      });
+    }
+  </script>
 </BaseLayout>

@@ -1,19 +1,21 @@
----
+﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHeader from "../components/PageHeader.astro";
-import ContactCards from "../components/react/ContactCards";
+import { profile } from "../data/profile";
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Contact | Caroline Thomas">
-  <PageHeader eyebrow="Contact" title="Contact Caroline." copy="For nurse residency, mentorship, and professional opportunities." />
-  <section class="section-pad pt-0">
-    <div class="container-premium max-w-3xl space-y-8">
-      <ContactCards client:load />
-      <aside class="glass rounded-[2rem] p-7 text-center">
-        <p class="eyebrow">Professional Contact</p>
-        <h2 class="mt-4 text-3xl font-bold tracking-tight text-navy">Thanks for reviewing.</h2>
-        <p class="mx-auto mt-5 max-w-2xl leading-7 text-ink/68">Best fit: emergency nursing, new graduate transition, service-minded teams, and growth-oriented clinical environments.</p>
-      </aside>
+  <section class="standalone-contact">
+    <div class="shell contact-panel">
+      <div class="contact-kicker"><span class="status-dot"></span> Available for 2026 new-grad conversations</div>
+      <h1>Let’s start with<br /><em>an introduction.</em></h1>
+      <p>{profile.location} · {profile.title}</p>
+      <div class="contact-actions">
+        <a class="button button-white" href={"mailto:" + profile.email}>{profile.email} <span aria-hidden="true">↗</span></a>
+        <a class="contact-text-link" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a class="contact-text-link" href={base + profile.resume}>Résumé ↓</a>
+      </div>
+      <span class="contact-monogram" aria-hidden="true">CT</span>
     </div>
   </section>
 </BaseLayout>
